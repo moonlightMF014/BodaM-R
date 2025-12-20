@@ -11,10 +11,18 @@ const elSecs = document.getElementById("cdSecs");
 function pad(n){ return String(n).padStart(2, "0"); }
 
 function updateCountdown(){
+  if(!elDays) return; // por si quitas esa sección
+
   const now = new Date();
   let diff = weddingDate - now;
 
-  if(diff < 0) diff = 0;
+  if(diff <= 0){
+    elDays.textContent = "0";
+    elHours.textContent = "00";
+    elMins.textContent = "00";
+    elSecs.textContent = "00";
+    return;
+  }
 
   const totalSeconds = Math.floor(diff / 1000);
   const days = Math.floor(totalSeconds / (3600 * 24));
@@ -22,16 +30,16 @@ function updateCountdown(){
   const mins = Math.floor((totalSeconds % 3600) / 60);
   const secs = totalSeconds % 60;
 
-  if(elDays) elDays.textContent = days;
-  if(elHours) elHours.textContent = pad(hours);
-  if(elMins) elMins.textContent = pad(mins);
-  if(elSecs) elSecs.textContent = pad(secs);
+  elDays.textContent = String(days);
+  elHours.textContent = pad(hours);
+  elMins.textContent = pad(mins);
+  elSecs.textContent = pad(secs);
 }
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// ====== MÚSICA (se activa solo al tocar, por políticas del navegador) ======
+// ====== MÚSICA ======
 const musicBtn = document.getElementById("musicBtn");
 const bgm = document.getElementById("bgm");
 
@@ -42,32 +50,48 @@ async function toggleMusic(){
 
   try{
     if(!isPlaying){
+      bgm.volume = 0.6;
       await bgm.play();
       isPlaying = true;
-      if(musicBtn) musicBtn.innerHTML = "⏸ Pausar";
+      musicBtn.textContent = "⏸ Música";
     }else{
       bgm.pause();
       isPlaying = false;
-      if(musicBtn) musicBtn.innerHTML = "▶ Música";
+      musicBtn.textContent = "▶ Música";
     }
   }catch(err){
+    // si el navegador bloquea algo, aquí cae (normal en iPhone sin interacción)
     console.log("No se pudo reproducir:", err);
   }
 }
 
 if(musicBtn) musicBtn.addEventListener("click", toggleMusic);
 
-// ====== FORM RSVP (demo) ======
+// ====== FORM RSVP ======
 const form = document.getElementById("rsvpForm");
+const status = document.getElementById("formStatus");
+
+// 2 opciones:
+// A) Enviar a Formspree (recomendado)
+// B) Guardar local (solo en el dispositivo - no recomendado para RSVP real)
+//
+// Dejo por defecto "B (local)" para que no falle.
+// Cuando me digas tu correo, te dejo el Formspree listo.
+
+function setStatus(msg){
+  if(status) status.textContent = msg;
+}
+
 if(form){
-  form.addEventListener("submit", (e)=>{
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const name = (document.getElementById("name")?.value || "").trim();
-    const guests = (document.getElementById("guests")?.value || "0").trim();
-    const attending = document.querySelector("input[name='attending']:checked")?.value || "si";
+    const data = Object.fromEntries(new FormData(form).entries());
+    console.log("RSVP:", data);
 
-    alert(`¡Gracias ${name || "!"} \nAsistencia: ${attending.toUpperCase()} \nAcompañantes: ${guests}`);
+    // ✅ Modo local (solo para pruebas)
+    localStorage.setItem("rsvp_last", JSON.stringify(data));
+    setStatus("¡Gracias! Tu confirmación se registró (modo prueba).");
 
     form.reset();
   });

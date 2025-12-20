@@ -2,29 +2,35 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Invitación - Marisol & Roberto</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles_fixed.css" />
 </head>
 <body>
 
-  <!-- Botón flotante de música (los navegadores móviles NO permiten autoplay, por eso es con botón) -->
+  <!-- Botón flotante de música -->
   <button id="musicBtn" class="music-btn" aria-label="Reproducir música">▶ Música</button>
+
+  <!-- ✅ OPCIÓN RECOMENDADA (renombra tu mp3 a cancion.mp3) -->
   <audio id="bgm" src="Sabino - Y Más.mp3" preload="auto" loop></audio>
+
+  <!-- ❗SI NO QUIERES RENOMBRAR, comenta la línea anterior y usa esta:
+  <audio id="bgm" src="assets/Sabino%20-%20Y%20M%C3%A1s.mp3" preload="auto" loop></audio>
+  -->
 
   <main class="stack">
 
     <!-- 1 -->
     <section class="slide" id="inicio">
-      <img class="bg" src="1.jpg" alt="Portada" loading="eager" />
+      <img class="bg" src="1.jpg" alt="Portada" />
     </section>
 
-    <!-- 2 (Countdown encima) -->
+    <!-- 2 (Countdown visible) -->
     <section class="slide" id="contador">
       <img class="bg" src="2.jpg" alt="Cuenta regresiva" />
 
-      <div class="overlay overlay-bottom" aria-label="Cuenta regresiva">
-        <div class="countdown">
+      <div class="overlay overlay-bottom">
+        <div class="countdown" aria-label="Cuenta regresiva">
           <div class="cd-item">
             <div class="cd-num" id="cdDays">--</div>
             <div class="cd-lbl">DÍAS</div>
@@ -42,35 +48,32 @@
             <div class="cd-lbl">SEGUNDOS</div>
           </div>
         </div>
-      </div>
+</div>
     </section>
 
     <!-- 3 (Links ubicaciones) -->
     <section class="slide" id="ubicaciones">
       <img class="bg" src="3.jpg" alt="Ubicaciones" />
-
-      <div class="overlay overlay-links">
-        <div class="links-row" aria-label="Links de ubicación">
-          <!-- Cambia estos enlaces por los tuyos -->
-          <a class="pill" href="#" target="_blank" rel="noopener">📍 Ceremonia</a>
-          <a class="pill" href="#" target="_blank" rel="noopener">📍 Recepción</a>
-          <a class="pill" href="#itinerario">🗓️ Itinerario</a>
-        </div>
-      </div>
     </section>
 
     <!-- 4 -->
     <section class="slide"><img class="bg" src="4.jpg" alt="Sección 4" /></section>
 
     <!-- 5 -->
-    <section class="slide" id="video">
-      <img class="bg" src="5.jpg" alt="Video / Foto" />
-      <!-- Si quieres que al tocar lleve a un video, cambia el href -->
-      <a class="tap-layer" href="#" aria-label="Abrir video"></a>
+    <section class="slide"><img class="bg" src="5.jpg" alt="Sección 5" />
+        <div class="overlay overlay-bottom links-row">
+        <!-- Reemplaza estos links por los tuyos reales -->
+        <a class="pill" href="https://maps.app.goo.gl/dFNx8SheyygaG2C66" target="_blank" rel="noopener">
+          📍 Ver Ceremonia
+        </a>
+        <a class="pill" href="https://maps.app.goo.gl/FfffYRgQ8usCFjH57" target="_blank" rel="noopener">
+          📍 Ver Recepción
+        </a>
+      </div>
     </section>
 
     <!-- 6 -->
-    <section class="slide"><img class="bg" src="6.jpg" alt="Itinerario" id="itinerario"/></section>
+    <section class="slide"><img class="bg" src="6.jpg" alt="Sección 6" /></section>
 
     <!-- 7 (Formulario encima) -->
     <section class="slide" id="confirmacion">
@@ -101,24 +104,27 @@
 
           <label>
             Mensaje (opcional)
-            <textarea name="mensaje" rows="3" placeholder="Escribe un mensaje"></textarea>
+            <textarea name="mensaje" rows="3" placeholder="Escribe un mensaje..."></textarea>
           </label>
 
-          <button class="btn" type="submit">Enviar</button>
-          <p id="formStatus" class="status" aria-live="polite"></p>
+          <button type="submit">Enviar</button>
+          <p class="small">
+            * Por ahora está en modo prueba (guarda local). Luego lo conectamos a correo/Google Sheets.
+          </p>
         </form>
+
+        <div id="formStatus" class="small"></div>
       </div>
     </section>
 
-    <!-- 8 (Regalos) -->
+    <!-- 8 (Mesas de regalo links) -->
     <section class="slide" id="regalos">
-      <img class="bg" src="8.jpg" alt="Mesa de regalos" />
-      <div class="overlay overlay-links">
-        <div class="links-row" aria-label="Mesa de regalos">
-          <!-- Cambia estos enlaces por los tuyos -->
-          <a class="pill" href="#" target="_blank" rel="noopener">🛒 Amazon</a>
-          <a class="pill" href="#" target="_blank" rel="noopener">🎁 Liverpool</a>
-        </div>
+      <img class="bg" src="8.jpg" alt="Regalos" />
+
+      <div class="overlay overlay-bottom gifts">
+        <!-- Reemplaza con tus links reales -->
+        <a class="pill" href="https://www.amazon.com.mx/wedding/share/MarisolyRoberto010526" target="_blank" rel="noopener">🎁 Amazon</a>
+        <a class="pill" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51899910" target="_blank" rel="noopener">🎁 Liverpool</a>
       </div>
     </section>
 
@@ -128,7 +134,7 @@
     <!-- 10 -->
     <section class="slide"><img class="bg" src="10.jpg" alt="Sección 10" /></section>
 
-    <!-- 11 - 19 -->
+    <!-- ✅ NUEVAS IMÁGENES 11 - 19 -->
     <section class="slide" id="historia"><img class="bg" src="11.jpg" alt="Nuestra historia" /></section>
     <section class="slide"><img class="bg" src="12.jpg" alt="Galería 12" /></section>
     <section class="slide"><img class="bg" src="13.jpg" alt="Galería 13" /></section>
@@ -141,6 +147,6 @@
 
   </main>
 
-  <script src="script.js"></script>
+  <script src="script_fixed.js"></script>
 </body>
 </html>

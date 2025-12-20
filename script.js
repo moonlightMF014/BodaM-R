@@ -3,18 +3,16 @@
 const weddingDate = new Date("2026-05-01T15:30:00"); // hora ejemplo
 
 // ====== COUNTDOWN ======
-const elDays  = document.getElementById("cdDays");
+const elDays = document.getElementById("cdDays");
 const elHours = document.getElementById("cdHours");
-const elMins  = document.getElementById("cdMins");
-const elSecs  = document.getElementById("cdSecs");
+const elMins = document.getElementById("cdMins");
+const elSecs = document.getElementById("cdSecs");
 
 function pad(n){ return String(n).padStart(2, "0"); }
 
 function updateCountdown(){
-  if(!elDays) return;
-
   const now = new Date();
-  let diff = weddingDate.getTime() - now.getTime();
+  let diff = weddingDate - now;
 
   if(diff < 0) diff = 0;
 
@@ -24,61 +22,53 @@ function updateCountdown(){
   const mins = Math.floor((totalSeconds % 3600) / 60);
   const secs = totalSeconds % 60;
 
-  elDays.textContent = String(days);
-  elHours.textContent = pad(hours);
-  elMins.textContent = pad(mins);
-  elSecs.textContent = pad(secs);
+  if(elDays) elDays.textContent = days;
+  if(elHours) elHours.textContent = pad(hours);
+  if(elMins) elMins.textContent = pad(mins);
+  if(elSecs) elSecs.textContent = pad(secs);
 }
 
-updateCountdown();
 setInterval(updateCountdown, 1000);
+updateCountdown();
 
-// ====== MÚSICA ======
-const btn = document.getElementById("musicBtn");
-const audio = document.getElementById("bgm");
+// ====== MÚSICA (se activa solo al tocar, por políticas del navegador) ======
+const musicBtn = document.getElementById("musicBtn");
+const bgm = document.getElementById("bgm");
 
-function setBtnLabel(isPlaying){
-  btn.textContent = isPlaying ? "⏸ Música" : "▶ Música";
-  btn.setAttribute("aria-label", isPlaying ? "Pausar música" : "Reproducir música");
-}
+let isPlaying = false;
 
-if(btn && audio){
-  setBtnLabel(false);
+async function toggleMusic(){
+  if(!bgm) return;
 
-  btn.addEventListener("click", async () => {
-    try{
-      if(audio.paused){
-        await audio.play();
-        setBtnLabel(true);
-      }else{
-        audio.pause();
-        setBtnLabel(false);
-      }
-    }catch(e){
-      // En algunos móviles, si el usuario no interactuó “bien”, play puede fallar.
-      console.warn("No se pudo reproducir:", e);
-      setBtnLabel(false);
+  try{
+    if(!isPlaying){
+      await bgm.play();
+      isPlaying = true;
+      if(musicBtn) musicBtn.innerHTML = "⏸ Pausar";
+    }else{
+      bgm.pause();
+      isPlaying = false;
+      if(musicBtn) musicBtn.innerHTML = "▶ Música";
     }
-  });
-
-  audio.addEventListener("pause", () => setBtnLabel(false));
-  audio.addEventListener("play",  () => setBtnLabel(true));
+  }catch(err){
+    console.log("No se pudo reproducir:", err);
+  }
 }
 
-// ====== FORM (modo prueba: guarda en localStorage) ======
+if(musicBtn) musicBtn.addEventListener("click", toggleMusic);
+
+// ====== FORM RSVP (demo) ======
 const form = document.getElementById("rsvpForm");
-const statusEl = document.getElementById("formStatus");
-
-function setStatus(msg){
-  if(statusEl) statusEl.textContent = msg;
-}
-
 if(form){
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", (e)=>{
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(form).entries());
-    localStorage.setItem("rsvp_last", JSON.stringify(data));
-    setStatus("¡Gracias! Tu confirmación se registró.");
+
+    const name = (document.getElementById("name")?.value || "").trim();
+    const guests = (document.getElementById("guests")?.value || "0").trim();
+    const attending = document.querySelector("input[name='attending']:checked")?.value || "si";
+
+    alert(`¡Gracias ${name || "!"} \nAsistencia: ${attending.toUpperCase()} \nAcompañantes: ${guests}`);
+
     form.reset();
   });
 }

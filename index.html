@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Invitación - Marisol & Roberto</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Botón flotante de música -->
+  <button id="musicBtn" class="music-btn" aria-label="Reproducir música">▶ Música</button>
+
+  <!-- ✅ OPCIÓN RECOMENDADA (renombra tu mp3 a cancion.mp3) -->
+  <audio id="bgm" src="Sabino - Y Más.mp3" preload="auto" loop></audio>
+
+  <!-- ❗SI NO QUIERES RENOMBRAR, comenta la línea anterior y usa esta:
+  <audio id="bgm" src="assets/Sabino%20-%20Y%20M%C3%A1s.mp3" preload="auto" loop></audio>
+  -->
+
+  <main class="stack">
+
+    <!-- 1 -->
+    <section class="slide" id="inicio">
+      <img class="bg" src="1.jpg" alt="Portada" />
+    </section>
+
+    <!-- 2 (Countdown visible) -->
+    <section class="slide" id="contador">
+      <img class="bg" src="2.jpg" alt="Cuenta regresiva" />
+
+      <div class="overlay overlay-bottom">
+        <div class="countdown" aria-label="Cuenta regresiva">
+          <div class="cd-item">
+            <div class="cd-num" id="cdDays">--</div>
+            <div class="cd-lbl">DÍAS</div>
+          </div>
+          <div class="cd-item">
+            <div class="cd-num" id="cdHours">--</div>
+            <div class="cd-lbl">HORAS</div>
+          </div>
+          <div class="cd-item">
+            <div class="cd-num" id="cdMins">--</div>
+            <div class="cd-lbl">MINUTOS</div>
+          </div>
+          <div class="cd-item">
+            <div class="cd-num" id="cdSecs">--</div>
+            <div class="cd-lbl">SEGUNDOS</div>
+          </div>
+        </div>
+        <div class="hint">Toca ▶ Música para escuchar</div>
+      </div>
+    </section>
+
+    <!-- 3 (Links ubicaciones) -->
+    <section class="slide" id="ubicaciones">
+      <img class="bg" src="3.jpg" alt="Ubicaciones" />
+    </section>
+
+    <!-- 4 -->
+    <section class="slide"><img class="bg" src="4.jpg" alt="Sección 4" /></section>
+
+    <!-- 5 -->
+    <section class="slide"><img class="bg" src="5.jpg" alt="Sección 5" />
+        <div class="overlay overlay-bottom links-row">
+        <!-- Reemplaza estos links por los tuyos reales -->
+        <a class="pill" href="https://maps.app.goo.gl/dFNx8SheyygaG2C66" target="_blank" rel="noopener">
+          📍 Ver Ceremonia
+        </a>
+        <a class="pill" href="https://maps.app.goo.gl/FfffYRgQ8usCFjH57" target="_blank" rel="noopener">
+          📍 Ver Recepción
+        </a>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide"><img class="bg" src="6.jpg" alt="Sección 6" /></section>
+
+    <!-- 7 (Formulario encima) -->
+    <section class="slide" id="confirmacion">
+      <img class="bg" src="7.jpg" alt="Confirmación" />
+
+      <div class="overlay overlay-right form-wrap">
+        <h2>Confirmación</h2>
+
+        <form id="rsvpForm" class="form">
+          <label>
+            Nombre completo
+            <input name="nombre" required placeholder="Escribe tu nombre" />
+          </label>
+
+          <label>
+            ¿Asistirás?
+            <select name="asistencia" required>
+              <option value="">Selecciona</option>
+              <option value="si">Sí, asistiré</option>
+              <option value="no">No podré asistir</option>
+            </select>
+          </label>
+
+          <label>
+            Número de personas
+            <input name="personas" type="number" min="1" max="10" value="1" />
+          </label>
+
+          <label>
+            Mensaje (opcional)
+            <textarea name="mensaje" rows="3" placeholder="Escribe un mensaje..."></textarea>
+          </label>
+
+          <button type="submit">Enviar</button>
+          <p class="small">
+            * Por ahora está en modo prueba (guarda local). Luego lo conectamos a correo/Google Sheets.
+          </p>
+        </form>
+
+        <div id="formStatus" class="small"></div>
+      </div>
+    </section>
+
+    <!-- 8 (Mesas de regalo links) -->
+    <section class="slide" id="regalos">
+      <img class="bg" src="8.jpg" alt="Regalos" />
+
+      <div class="overlay overlay-bottom gifts">
+        <!-- Reemplaza con tus links reales -->
+        <a class="pill" href="https://www.amazon.com.mx/wedding/share/MarisolyRoberto010526" target="_blank" rel="noopener">🎁 Amazon</a>
+        <a class="pill" href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51899910" target="_blank" rel="noopener">🎁 Liverpool</a>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide"><img class="bg" src="9.jpg" alt="Sección 9" /></section>
+
+    <!-- 10 -->
+    <section class="slide"><img class="bg" src="10.jpg" alt="Sección 10" /></section>
+
+    <!-- ✅ NUEVAS IMÁGENES 11 - 19 -->
+    <section class="slide" id="historia"><img class="bg" src="11.jpg" alt="Nuestra historia" /></section>
+    <section class="slide"><img class="bg" src="12.jpg" alt="Galería 12" /></section>
+    <section class="slide"><img class="bg" src="13.jpg" alt="Galería 13" /></section>
+    <section class="slide"><img class="bg" src="14.jpg" alt="Galería 14" /></section>
+    <section class="slide"><img class="bg" src="15.jpg" alt="Galería 15" /></section>
+    <section class="slide"><img class="bg" src="16.jpg" alt="Galería 16" /></section>
+    <section class="slide"><img class="bg" src="17.jpg" alt="Galería 17" /></section>
+    <section class="slide"><img class="bg" src="18.jpg" alt="Galería 18" /></section>
+    <section class="slide"><img class="bg" src="19.jpg" alt="Galería 19" /></section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

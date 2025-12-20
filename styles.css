@@ -15,40 +15,38 @@ a{ color: inherit; }
 
 .slide{
   position: relative;
-  width: 100%;
-  min-height: 100vh; /* cada imagen ocupa pantalla completa */
+  height: 100svh; /* better on mobile */
+  min-height: 100vh;
   overflow: hidden;
-  background: #000;
 }
 
 .bg{
-  width:100%;
-  height:100%;
-  min-height:100vh;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  display:block;
+  object-position: center;
 }
 
 /* Overlays */
 .overlay{
   position:absolute;
-  display:flex;
-  gap:12px;
-  align-items:center;
-  padding: 40px 40px;
-  border-radius: var(--radius);
-  /*background: var(--glass);*/
-  color: #fff;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(12px);
+  color:#fff;
+  z-index:2;
+  padding: 14px 16px;
+  border-radius: 18px;
+  backdrop-filter: blur(16px);
 }
 
 .overlay-bottom{
-  left: 16px;
-  right: 16px;
-  bottom: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 18px;
+  width: min(920px, calc(100% - 32px));
+  background: rgba(255,255,255,.18);
+  border: 1px solid rgba(255,255,255,.20);
+  box-shadow: 0 12px 40px rgba(0,0,0,.22);
 }
 
 .overlay-right{
@@ -76,24 +74,25 @@ a{ color: inherit; }
 
 /* Countdown */
 .countdown{
-  display:flex;
-  gap: 14px;
+  display: flex;
+  justify-content: center;
+  gap: clamp(10px, 2.2vw, 18px);
   flex-wrap: wrap;
-  justify-content:center;
 }
 
 .cd-item{
-  min-width: 86px;
-  text-align:center;
-  padding: 10px 12px;
-  border-radius: 14px;
-  background: rgba(0, 0, 0, 0.12);
+  background: rgba(0,0,0,.18);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px;
+  padding: 10px 14px;
+  min-width: clamp(72px, 18vw, 110px);
+  text-align: center;
 }
 
 .cd-num{
-  font-size: 30px;
-  font-weight: 800;
-  letter-spacing: .5px;
+  font-size: clamp(22px, 5.2vw, 34px);
+  font-weight: 700;
+  line-height: 1;
 }
 .cd-lbl{
   font-size: 12px;
@@ -101,26 +100,29 @@ a{ color: inherit; }
   margin-top: 2px;
 }
 
-.hint{
-  width:100%;
-  text-align:center;
-  font-size: 12px;
-  opacity: .9;
-}
+.hint{ display:none; }
 
 /* Links */
 .links-row{
-  gap: 10px;
+  display:flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
 }
 
 .pill{
-  text-decoration: none;
-  padding: 10px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
   border-radius: 999px;
-  background: rgba(255,255,255,.92);
-  color:#111;
-  font-weight: 700;
-  box-shadow: var(--shadow);
+  background: rgba(255,255,255,.20);
+  border: 1px solid rgba(255,255,255,.22);
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 10px 28px rgba(0,0,0,.18);
 }
 
 .gifts{
@@ -180,108 +182,18 @@ button[type="submit"]{
     right: 16px;
     width: auto;
   }
+  .overlay-bottom{
+    bottom: 12px;
+    width: calc(100% - 24px);
+  }
+  .cd-item{
+    padding: 10px 12px;
+    min-width: 78px;
+  }
+  .links-row{ gap: 14px; }
+  .pill{ padding: 12px 16px; font-size: 15px; }
+}
   .cd-item{ min-width: 74px; }
 }
 
-
-/* ===== Ajustes solicitados (contador, botones, responsive móvil) ===== */
-
-/* Evita que el overlay ocupe todo el ancho y tape la imagen */
-.overlay-bottom{
-  left: 50% !important;
-  right: auto !important;
-  transform: translateX(-50%);
-  width: min(760px, calc(100% - 32px));
-  bottom: 18px;
-  padding: 16px 18px;
-  border-radius: 22px;
-  background: rgba(255,255,255,.18);
-  color: #fff;
-  backdrop-filter: blur(14px);
-}
-
-/* Contador: tamaño “medio” y centrado */
-.countdown{
-  gap: 12px;
-}
-.cd-item{
-  min-width: 92px;
-  padding: 12px 14px;
-  border-radius: 16px;
-  background: rgba(0,0,0,.18);
-}
-.cd-num{
-  font-size: 34px;
-  line-height: 1;
-}
-.cd-lbl{
-  font-size: 12px;
-  letter-spacing: .6px;
-}
-
-/* Quita el texto “Toca ▶ Música…” */
-.hint{ display:none !important; }
-
-/* Botones/links más visibles */
-.links-row{
-  gap: 18px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.pill{
-  font-size: 18px;
-  padding: 14px 18px;
-  border-radius: 999px;
-  background: rgba(255,255,255,.92);
-  color: #111;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* Slides: asegura pantalla completa y evita bandas negras por la barra del navegador móvil */
-.slide{
-  height: 100vh;
-}
-.bg{
-  height: 100%;
-  min-height: 100%;
-}
-
-/* ===== Responsive (móvil) ===== */
-@media (max-width: 600px){
-  .slide{ height: 100svh; min-height: 100svh; }
-  .bg{ min-height: 100svh; }
-
-  .music-btn{
-    right: 10px;
-    top: 10px;
-    padding: 10px 12px;
-    font-size: 14px;
-  }
-
-  .overlay-bottom{
-    width: calc(100% - 20px);
-    bottom: 12px;
-    padding: 12px 12px;
-  }
-
-  .cd-item{
-    min-width: 74px;
-    padding: 10px 10px;
-  }
-  .cd-num{ font-size: 28px; }
-
-  .links-row{ gap: 12px; }
-  .links-row .pill{
-    flex: 1 1 220px;
-    justify-content: center;
-    font-size: 16px;
-    padding: 12px 14px;
-  }
-}
-
-/* Evita scroll horizontal accidental */
-body{ overflow-x: hidden; }
-
+.pill .emoji{ font-size: 22px; line-height: 1; }

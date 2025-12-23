@@ -145,6 +145,15 @@ a{
   box-shadow: var(--shadow);
 }
 
+.gifts{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
 /* =========================
    FORM
    ========================= */

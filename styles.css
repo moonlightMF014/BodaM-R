@@ -1,27 +1,40 @@
 :root{
   --radius: 18px;
   --shadow: 0 8px 28px rgba(0,0,0,.25);
-  --glass: rgba(0,0,0,.45);
 }
 
-*{ box-sizing: border-box; }
-html,body{ height:100%; margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial; }
-a{ color: inherit; }
+*{
+  box-sizing: border-box;
+}
+
+html, body{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  background: #fff;
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
 
 .stack{
-  width:100%;
-  margin:0;
+  width: 100%;
 }
+
+/* =========================
+   DESKTOP / TABLET (DEFAULT)
+   ========================= */
 
 .slide{
   position: relative;
-  /* Viewport height: fallbacks for older browsers + correct iOS behavior */
+  width: 100%;
   height: 100vh;
-  height: 100svh; /* small viewport (iOS address bar) */
-  height: 100dvh; /* dynamic viewport (newer browsers) */
-  min-height: 100vh;
+  height: 100svh;
+  height: 100dvh;
   overflow: hidden;
-  background: #000; /* letterbox color when using object-fit: contain on mobile */
 }
 
 .bg{
@@ -33,14 +46,17 @@ a{ color: inherit; }
   object-position: center;
 }
 
-/* Overlays */
+/* =========================
+   OVERLAYS
+   ========================= */
+
 .overlay{
-  position:absolute;
-  color:#fff;
-  z-index:2;
+  position: absolute;
+  z-index: 2;
+  color: #fff;
   padding: 14px 16px;
   border-radius: 18px;
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(14px);
 }
 
 .overlay-bottom{
@@ -48,67 +64,71 @@ a{ color: inherit; }
   transform: translateX(-50%);
   bottom: 18px;
   width: min(920px, calc(100% - 32px));
-  background: rgba(255,255,255,.18);
-  border: 1px solid rgba(255,255,255,.20);
-  box-shadow: 0 12px 40px rgba(0,0,0,.22);
+  background: rgba(0,0,0,.45);
+  box-shadow: var(--shadow);
 }
 
 .overlay-right{
   top: 16px;
   right: 16px;
   width: min(420px, calc(100% - 32px));
-  flex-direction: column;
-  align-items: stretch;
+  background: rgba(0,0,0,.45);
+  box-shadow: var(--shadow);
 }
 
-/* Música */
+/* =========================
+   BOTÓN MÚSICA
+   ========================= */
+
 .music-btn{
   position: fixed;
   z-index: 9999;
   right: calc(14px + env(safe-area-inset-right));
   top: calc(14px + env(safe-area-inset-top));
-  padding: 10px 12px;
-  border: 0;
+  padding: 10px 14px;
+  border: none;
   border-radius: 999px;
   cursor: pointer;
-  box-shadow: var(--shadow);
-  background: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.95);
   font-weight: 700;
+  box-shadow: var(--shadow);
 }
 
-/* Countdown */
+/* =========================
+   COUNTDOWN
+   ========================= */
+
 .countdown{
   display: flex;
   justify-content: center;
-  gap: clamp(10px, 2.2vw, 18px);
+  gap: 14px;
   flex-wrap: wrap;
 }
 
 .cd-item{
-  background: rgba(0,0,0,.18);
-  border: 1px solid rgba(255,255,255,.18);
-  border-radius: 12px;
+  background: rgba(255,255,255,.15);
+  border-radius: 14px;
   padding: 10px 14px;
-  min-width: clamp(72px, 18vw, 110px);
+  min-width: 90px;
   text-align: center;
 }
 
 .cd-num{
-  font-size: clamp(22px, 5.2vw, 34px);
-  font-weight: 700;
-  line-height: 1;
+  font-size: 28px;
+  font-weight: 800;
 }
+
 .cd-lbl{
   font-size: 12px;
   opacity: .9;
-  margin-top: 2px;
 }
 
-.hint{ display:none; }
+/* =========================
+   LINKS / PILLS
+   ========================= */
 
-/* Links */
 .links-row{
-  display:flex;
+  display: flex;
   justify-content: center;
   gap: 18px;
   flex-wrap: wrap;
@@ -117,94 +137,107 @@ a{ color: inherit; }
 .pill{
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   padding: 12px 18px;
   border-radius: 999px;
-  background: rgba(255,255,255,.20);
-  border: 1px solid rgba(255,255,255,.22);
-  color: #fff;
-  text-decoration: none;
-  font-size: 16px;
+  background: rgba(255,255,255,.25);
   font-weight: 600;
-  box-shadow: 0 10px 28px rgba(0,0,0,.18);
+  box-shadow: var(--shadow);
 }
 
-.gifts{
-  gap: 10px;
-}
+/* =========================
+   FORM
+   ========================= */
 
 .form-wrap h2{
-  margin: 0 0 8px 0;
-  font-size: 20px;
+  margin: 0 0 8px;
 }
 
 .form{
-  display:flex;
+  display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 label{
-  display:flex;
+  font-size: 13px;
+  display: flex;
   flex-direction: column;
   gap: 6px;
-  font-size: 13px;
 }
 
 input, select, textarea{
-  width:100%;
   padding: 10px 12px;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,.22);
-  background: rgba(255,255,255,.10);
-  color: #fff;
-  outline: none;
+  border: none;
 }
 
-textarea{ resize: vertical; }
-
 button[type="submit"]{
-  padding: 11px 12px;
+  padding: 12px;
   border-radius: 12px;
-  border: 0;
-  cursor:pointer;
+  border: none;
   font-weight: 800;
-  background: rgba(255,255,255,.92);
-  color: #111;
+  cursor: pointer;
 }
 
 .small{
   font-size: 12px;
-  opacity: .9;
-  margin: 0;
+  opacity: .85;
 }
 
-/* Mobile */
-@media (max-width: 520px){
-  .overlay-right{
-    left: 16px;
-    right: 16px;
-    width: auto;
-  }
-  .overlay-bottom{
-    bottom: 12px;
-    width: calc(100% - 24px);
-  }
-  .cd-item{
-    padding: 10px 12px;
-    min-width: 78px;
-  }
-  .links-row{ gap: 14px; }
-  .pill{ padding: 12px 16px; font-size: 15px; }
-}
+/* =========================
+   MOBILE (iOS + ANDROID)
+   ========================= */
 
-/* iPhone/portrait: muestra la imagen COMPLETA (sin recortar) */
-@media (max-width: 520px) and (orientation: portrait){
+@media (max-width: 768px){
+
+  /* 🔑 CLAVE: las slides ya NO fuerzan 100vh */
+  .slide{
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  /* 🔑 La imagen define su altura → NO barras negras */
   .bg{
+    position: relative;
+    width: 100%;
+    height: auto;
     object-fit: contain;
-    /* normalmente las invitaciones tienen texto arriba; esto ayuda */
-    object-position: center top;
+    display: block;
+  }
+
+  .overlay-bottom{
+    position: relative;
+    left: auto;
+    transform: none;
+    bottom: auto;
+    margin: 16px auto;
+  }
+
+  .overlay-right{
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 16px auto;
+    width: calc(100% - 32px);
+  }
+
+  .countdown{
+    gap: 10px;
+  }
+
+  .cd-item{
+    min-width: 72px;
+    padding: 10px;
+  }
+
+  .cd-num{
+    font-size: 22px;
+  }
+
+  .pill{
+    font-size: 15px;
+    padding: 12px 16px;
   }
 }
-
-.pill .emoji{ font-size: 22px; line-height: 1; }

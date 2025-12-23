@@ -15,9 +15,13 @@ a{ color: inherit; }
 
 .slide{
   position: relative;
-  height: 100svh; /* better on mobile */
+  /* Viewport height: fallbacks for older browsers + correct iOS behavior */
+  height: 100vh;
+  height: 100svh; /* small viewport (iOS address bar) */
+  height: 100dvh; /* dynamic viewport (newer browsers) */
   min-height: 100vh;
   overflow: hidden;
+  background: #000; /* letterbox color when using object-fit: contain on mobile */
 }
 
 .bg{
@@ -61,8 +65,8 @@ a{ color: inherit; }
 .music-btn{
   position: fixed;
   z-index: 9999;
-  right: 14px;
-  top: 14px;
+  right: calc(14px + env(safe-area-inset-right));
+  top: calc(14px + env(safe-area-inset-top));
   padding: 10px 12px;
   border: 0;
   border-radius: 999px;
@@ -193,7 +197,14 @@ button[type="submit"]{
   .links-row{ gap: 14px; }
   .pill{ padding: 12px 16px; font-size: 15px; }
 }
-  .cd-item{ min-width: 74px; }
+
+/* iPhone/portrait: muestra la imagen COMPLETA (sin recortar) */
+@media (max-width: 520px) and (orientation: portrait){
+  .bg{
+    object-fit: contain;
+    /* normalmente las invitaciones tienen texto arriba; esto ayuda */
+    object-position: center top;
+  }
 }
 
 .pill .emoji{ font-size: 22px; line-height: 1; }
